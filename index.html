@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Development for Dummies - Live Demo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e9f0f6;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 90%;
+            transition: all 0.5s ease-in-out;
+            overflow: hidden; /* Ensures content transitions smoothly */
+        }
+
+        /* Styling for each page section */
+        .page-section {
+            display: none; /* Hidden by default */
+            animation: fadeIn 0.8s ease-out; /* Fade-in effect when active */
+        }
+        .page-section.active {
+            display: block; /* Displayed when active */
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* General element styling */
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 2.8em;
+            line-height: 1.2;
+        }
+        h2 {
+            color: #34495e;
+            margin-bottom: 25px;
+            font-size: 1.6em;
+            font-weight: normal;
+        }
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: #555;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        .btn-success {
+            background-color: #28a745;
+            box-shadow: 0 4px 10px rgba(40, 167, 69, 0.2);
+        }
+        .btn-success:hover {
+            background-color: #218838;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 30px auto;
+            text-align: left;
+            max-width: 500px;
+        }
+        ul li {
+            background-color: #f7f9fb;
+            margin-bottom: 10px;
+            padding: 12px 20px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            font-size: 1em;
+            border: 1px solid #e0e6ea;
+        }
+        ul li::before {
+            content: '✓'; /* Checkmark icon */
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        .testimonial {
+            margin-top: 35px;
+            font-style: italic;
+            color: #666;
+            border-top: 1px solid #eee;
+            padding-top: 25px;
+            font-size: 0.95em;
+        }
+
+        /* Form specific styling */
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #555;
+            font-size: 1.05em;
+        }
+        input[type="text"],
+        input[type="email"],
+        select {
+            width: calc(100% - 24px); /* Adjusts for padding */
+            padding: 14px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 1em;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        select:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.1);
+        }
+        .form-checkbox-label {
+            display: inline-block !important; /* Override label block display */
+            font-weight: normal !important;
+            vertical-align: middle;
+        }
+
+        /* Thank You page specific styling */
+        .thank-you-header {
+            color: #28a745;
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        .ebook-image {
+            margin: 30px auto 20px auto;
+            max-width: 180px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            display: block; /* Centers the image */
+        }
+        .share-text {
+            margin-top: 40px;
+            font-size: 0.95em;
+            color: #666;
+        }
+        .share-link {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .share-link:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="landingPage" class="page-section active">
+            <h1>Demystify Web Development: Your Ultimate Guide for Beginners!</h1>
+            <h2>Ever wanted to build your own website but felt overwhelmed? **'Web Development for Dummies'** is your clear, concise, and comprehensive resource to get started today!</h2>
+            <p>Dive into the exciting world of web development without the jargon and complexity. This essential guide breaks down core concepts, from HTML basics to understanding how websites work, making it perfect for absolute beginners. Learn at your own pace and unlock the power to create!</p>
+
+            <button class="btn" onclick="showSection('detailsCollection')">Get Your Free E-Book Now!</button>
+
+            <ul>
+                <li>Learn HTML, CSS, and basic JavaScript principles.</li>
+                <li>Understand how websites are structured.</li>
+                <li>Build your first web page in no time.</li>
+                <li>Perfect for absolute beginners, no prior coding experience needed!</li>
+            </ul>
+
+            <div class="testimonial">
+                "Finally, a guide that makes sense! I'm already building my first page." - A Happy Beginner
+            </div>
+        </div>
+
+        <div id="detailsCollection" class="page-section">
+            <h1>Almost There! Just a Few Details Away from Your E-Book!</h1>
+            <p>We just need a little information to send you your free copy of **'Web Development for Dummies'**.</p>
+
+            <form id="downloadForm">
+                <div class="form-group">
+                    <label for="fullName">Full Name:</label>
+                    <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="experience">What's your current experience level with web development?</label>
+                    <select id="experience" name="experience">
+                        <option value="absolute_beginner">Absolute Beginner</option>
+                        <option value="some_basic">Some Basic Knowledge</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="newsletter" name="newsletter">
+                    <label for="newsletter" class="form-checkbox-label">Yes, I'd like to receive occasional updates and tips on web development.</label>
+                </div>
+                <button type="submit" class="btn btn-success">Download My E-Book Now!</button>
+            </form>
+        </div>
+
+        <div id="thankYouPage" class="page-section">
+            <h1 class="thank-you-header">Thank You!</h1>
+            <h2>Your E-Book Awaits!</h2>
+            <p>Your journey into web development starts now. We hope you find this resource incredibly valuable!</p>
+            <p>Your download should start automatically. If it doesn't, or if you prefer to access it directly, please use the link below:</p>
+
+            <img src="https://via.placeholder.com/150x200?text=Ebook+Cover" alt="Web Development for Dummies E-book Cover" class="ebook-image">
+
+            <a href="https://mrce.in/ebooks/Web%20Coding%20&%20Development%202nd%20Ed.pdf" class="btn" download>Click Here to Download Your E-Book!</a>
+
+            <p class="share-text">Want to share this awesome resource with a friend? Send them to our <a href="#" onclick="showSection('landingPage')" class="share-link">landing page</a>!</p>
+        </div>
+    </div>
+
+    <script>
+        // Function to control which section is visible
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(section => {
+                section.classList.remove('active'); // Hide all sections
+            });
+            document.getElementById(sectionId).classList.add('active'); // Show the target section
+        }
+
+        // Handle form submission
+        document.getElementById('downloadForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Stop the form from submitting traditionally (and reloading the page)
+
+            // Basic validation
+            const fullName = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+
+            if (fullName === '' || email === '') {
+                alert('Please fill in both your Full Name and Email Address to proceed.');
+                return; // Stop the function if validation fails
+            }
+
+            // In a real application, you'd send this data to your server here
+            console.log('Form data collected:');
+            console.log('Name:', fullName);
+            console.log('Email:', email);
+            console.log('Experience Level:', document.getElementById('experience').value);
+            console.log('Newsletter Opt-in:', document.getElementById('newsletter').checked);
+
+            // Transition to the thank you page
+            showSection('thankYouPage');
+
+            // Trigger the download automatically after a short delay
+            setTimeout(() => {
+                const downloadLink = document.createElement('a');
+                downloadLink.href = 'https://mrce.in/ebooks/Web%20Coding%20&%20Development%202nd%20Ed.pdf';
+                downloadLink.download = 'Web_Development_for_Dummies.pdf'; // Suggests a filename for the download
+                document.body.appendChild(downloadLink); // Temporarily add to the DOM
+                downloadLink.click(); // Programmatically click the link to start download
+                document.body.removeChild(downloadLink); // Remove it from the DOM
+            }, 1000); // 1-second delay for smooth transition
+        });
+    </script>
+</body>
+</html>
